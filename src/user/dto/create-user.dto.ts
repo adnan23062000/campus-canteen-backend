@@ -1,3 +1,5 @@
+import { UserRole } from "../entities/user.entity";
+
 export class CreateUserDto {
     fullname: string;
     email: string;
@@ -6,5 +8,5 @@ export class CreateUserDto {
     registrationNumber: number;
     profilePic: string;
     idCard: string;
-    role: string;
+    role: UserRole;
 }
