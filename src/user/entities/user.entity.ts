@@ -1,5 +1,12 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
+export enum UserRole {
+  Customer = 'customer',
+  Vendor = 'vendor',
+  Admin = 'admin',
+  DeliveryPerson = 'delivery person',
+}
+
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -26,8 +33,8 @@ export class User {
   @Column({ nullable: true })
   idCard: string;
 
-  @Column({ nullable: false }) 
-  role: string;
+  @Column({ type: 'enum', nullable: false, enum: UserRole }) 
+  role: UserRole;
 
   @Column({ default: false }) 
   verified: boolean;
