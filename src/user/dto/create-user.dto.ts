@@ -6,4 +6,5 @@ export class CreateUserDto {
     registrationNumber: number;
     profilePic: string;
     idCard: string;
+    role: string;
 }

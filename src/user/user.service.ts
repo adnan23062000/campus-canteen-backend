@@ -21,6 +21,7 @@ export class UserService {
     user.registrationNumber = createUserDto.registrationNumber;
     user.profilePic = createUserDto.profilePic;
     user.idCard = createUserDto.idCard;
+    user.role = createUserDto.role;
     return this.userRepository.save(user);
   }
 
