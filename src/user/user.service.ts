@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { FindOneOptions, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
+import { hashPassword } from 'src/utils/hashPassword.util';
 
 @Injectable()
 export class UserService {
@@ -12,12 +13,12 @@ export class UserService {
     
   }
 
-  create(createUserDto: CreateUserDto): Promise<User> {
+  async create(createUserDto: CreateUserDto): Promise<User> {
     let user: User = new User();
     user.fullname = createUserDto.fullname;
     user.email = createUserDto.email;
     user.contactNo = createUserDto.contactNo;
-    user.password = createUserDto.password;
+    user.password = await hashPassword(createUserDto.password);
     user.registrationNumber = createUserDto.registrationNumber;
     user.profilePic = createUserDto.profilePic;
     user.idCard = createUserDto.idCard;
@@ -34,11 +35,11 @@ export class UserService {
     return this.userRepository.findOne(options);
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
+  async update(id: string, updateUserDto: UpdateUserDto) {
     let user: User = new User();
     user.email = updateUserDto.email;
     user.contactNo = updateUserDto.contactNo;
-    user.password = updateUserDto.password;
+    user.password = await hashPassword(updateUserDto.password);
     user.profilePic = updateUserDto.profilePic;
 
     return this.userRepository.update(id, user);
