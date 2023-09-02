@@ -14,16 +14,6 @@ export class UserService {
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
-    // let user: User = new User();
-    // user.fullname = createUserDto.fullname;
-    // user.email = createUserDto.email;
-    // user.contactNo = createUserDto.contactNo;
-    // user.password = await hashPassword(createUserDto.password);
-    // user.registrationNumber = createUserDto.registrationNumber;
-    // user.profilePic = createUserDto.profilePic;
-    // user.idCard = createUserDto.idCard;
-    // user.role = createUserDto.role;
-    // console.log(createUserDto);
     createUserDto.password = await hashPassword(createUserDto.password);
     return this.userRepository.save({ ...createUserDto });
   }
@@ -37,13 +27,11 @@ export class UserService {
     return this.userRepository.findOne(options);
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto) {
-    // let user: User = new User();
-    // user.email = updateUserDto.email;
-    // user.contactNo = updateUserDto.contactNo;
-    // user.password = await hashPassword(updateUserDto.password);
-    // user.profilePic = updateUserDto.profilePic;
+  async findByEmail(email: string): Promise<User | undefined> {
+    return this.userRepository.findOne({ where: { email } });
+  }
 
+  async update(id: string, updateUserDto: UpdateUserDto) {
     updateUserDto.password = await hashPassword(updateUserDto.password);
     return this.userRepository.update(id, { ...updateUserDto });
   }

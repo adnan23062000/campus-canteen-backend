@@ -21,7 +21,6 @@ export class UserController {
   @ApiResponse({ status: 403, description: 'Forbidden.' })
   @ApiResponse({ status: 201, description: 'User created.', type: User })
   create(@Body() createUserDto: CreateUserDto) {
-    console.log(createUserDto);
     return this.userService.create(createUserDto);
   }
 
@@ -46,6 +45,22 @@ export class UserController {
   })
   findOne(@Param('id') id: string) {
     return this.userService.findOne(id);
+  }
+
+
+  @Get('email/:email')
+  @ApiOperation({ summary: 'Find user by email' })
+  @ApiResponse({
+    status: 200,
+    description: 'User found',
+    type: User,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'User not found',
+  })
+  findByEmail(@Param('email') email: string) {
+    return this.userService.findByEmail(email);
   }
 
 
