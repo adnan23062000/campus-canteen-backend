@@ -48,24 +48,24 @@ export class User {
 
   @ApiProperty({
     type: Number,
-    description: 'registrationNumber is required',
+    description: 'registrationNumber is optional',
   })
   @Column({ type: 'int', nullable: true })
-  registrationNumber: number;
+  registrationNumber?: number; 
 
   @ApiProperty({
     type: String,
-    description: 'profilePic is required',
+    description: 'profilePic is optional',
   })
   @Column({ nullable: true })
-  profilePic: string;
+  profilePic?: string; 
 
   @ApiProperty({
     type: String,
-    description: 'idCard is required',
+    description: 'idCard is optional',
   })
   @Column({ nullable: true })
-  idCard: string;
+  idCard?: string; 
 
   @ApiProperty({
     type: String,
