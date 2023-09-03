@@ -11,6 +11,7 @@ async function bootstrap() {
     .setDescription('Campus Canteen API description')
     .setVersion('1.0')
     .addTag('user')
+    .addTag('file')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('swagger', app, document);
